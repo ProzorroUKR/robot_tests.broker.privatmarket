@@ -30,6 +30,10 @@ def modify_test_data(initial_data):
     # initial_data['procuringEntity']['name'] = u'ФОП ОГАНІН ОЛЕКСАНДР ПЕТРОВИЧ'
     return initial_data
 
+def convert_date_to_format(date, format):
+    dat = dateutil.parser.parse(date)
+    return dat.strftime(format)
+
 def add_day_to_date(date):
     dat = parser.parse(date)
     new_date = (dat + timedelta(days=1)).strftime('%Y-%m-%dT%H:%M:%S%z')
@@ -400,12 +404,12 @@ def get_milestones_duration_type(type):
 def get_rationaleType (type):
     type_dictionary = {
         u'Зменшення обсягів закупівлі': 'volumeCuts',
-        u'Зміна сторонніх показників (курсу, тарифів...)': 'thirdParty',
+        u'Зміна сторонніхпоказників (курсу, тарифів...)': 'thirdParty',
         u'Зміна ціни у зв’язку із зміною ставок податків і зборів': 'taxRate',
         u'Покращення якості предмета закупівлі': 'qualityImprovement',
         u'Узгоджене зменшення ціни': 'priceReduction',
         u'Зміна ціни за одиницю товару': 'itemPriceVariation',
-        u'Продовження строку дії договору на наступний рік': 'fiscalYearExtension',
+        u'Продовження строку дії договоруна наступний рік': 'fiscalYearExtension',
         u'Продовження строку дії договору (черездокументально підтверджені об’єктивні обставини)': 'durationExtension',
 
     }
@@ -439,3 +443,11 @@ def get_budgetBreakdown (type):
 
 def change_fake_date():
     return (datetime.datetime.now(timezone('Europe/Kiev')) + timedelta(days=3)).strftime('%Y-%m-%dT%H:%M:%S.%f%z')
+
+
+def get_change_field_name(change_dict):
+    return list(change_dict.keys())[1]
+
+
+def get_change_field_value(change_dict):
+    return list(change_dict.values())[1]
