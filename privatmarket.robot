@@ -4682,6 +4682,7 @@ Get Item Number
     [Arguments]  ${username}  ${agreement_uaid}  ${change_data}
     Reload Page
     Wait Visibility And Click Element  css=a#agreementBtn
+    Wait Until Element Is Not Visible  xpath=//img[contains(@src,'loader')]  120s
     ${rationaleType}=  Set Variable  ${change_data.data.rationaleType}
 
     Run Keyword If  '${rationaleType}' == 'taxRate' or '${rationaleType}' == 'itemPriceVariation' or '${rationaleType}' == 'thirdParty'
@@ -4715,6 +4716,7 @@ Get Item Number
     Reload Page
 
     Wait Visibility And Click Element  css=a#agreementBtn
+    Wait Until Element Is Not Visible  xpath=//img[contains(@src,'loader')]  120s
     Wait Visibility And Click Element  xpath=//a/span[text()='Зміни до рамкової угоди']
     ${field_name}=  Run Keyword  privatmarket_service.get_change_field_name  ${change_data.data.modifications[0]}
     ${field_value}=  Run Keyword  privatmarket_service.get_change_field_value  ${change_data.data.modifications[0]}
@@ -4744,6 +4746,7 @@ Get Item Number
     [Arguments]  ${username}  ${file_path}  ${agreement_uaid}  ${item_id}
     Reload Page
     Wait Visibility And Click Element  css=a#agreementBtn
+    Wait Until Element Is Not Visible  xpath=//img[contains(@src,'loader')]  120s
     Wait Visibility And Click Element  xpath=//a/span[text()='Зміни до рамкової угоди']
     Wait Visibility And Click Element  xpath=//span[contains(@ng-click,'change.addDocs')]
 
@@ -4761,7 +4764,7 @@ Get Item Number
     [Arguments]  ${username}  ${agreement_uaid}  ${dateSigned}  ${status}
     Reload Page
     Wait Visibility And Click Element  css=a#agreementBtn
-    Wait Until Element Is Not Visible  xpath=//img[contains(@src,'loader')]  ${COMMONWAIT}
+    Wait Until Element Is Not Visible  xpath=//img[contains(@src,'loader')]  120s
     Wait Visibility And Click Element  xpath=//a/span[text()='Зміни до рамкової угоди']
 
     ${signed}=  privatmarket_service.convert_date_to_format  ${dateSigned}  %d-%m-%Y %H:%M
@@ -4775,13 +4778,14 @@ Get Item Number
 
     Run Keyword If  '${status}' == 'active'
     ...  Wait Visibility And Click Element  xpath=//button[@data-id='activete-agreement-changes']
-    sleep  120s
+    sleep  200s
     Reload Page
     Wait Visibility And Click Element  css=a#agreementBtn
+    Wait Until Element Is Not Visible  xpath=//img[contains(@src,'loader')]  120s
     Wait Visibility And Click Element  xpath=//a/span[text()='Зміни до рамкової угоди']
     Wait Visibility And Click Element  xpath=//div[@data-id='present-ecp']
     Завантажити ЕЦП
-    sleep  120s
+    sleep  240s
 
 
 
